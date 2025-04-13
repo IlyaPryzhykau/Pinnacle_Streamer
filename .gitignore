@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.log
+
+# Environments
+.env
+.env.*
+
+# Virtualenv
+.venv/
+venv/
+
+# Pytest
+.cache/
+.pytest_cache/
+
+# SQLAlchemy / Alembic
+alembic.ini
+migrations/
+
+# VSCode
+.vscode/
+
+# Docker
+*.pid
+*.db
+*.sqlite3
+docker-compose.override.yml
+
+# CSV/архивы
+exports/
+*.csv
+*.zip
+
+# Mega credentials
+*.mega
+*.session
+
+# OS
+.DS_Store
+Thumbs.db

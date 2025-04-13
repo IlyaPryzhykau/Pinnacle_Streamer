@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:15
+    container_name: pinnacle_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: app_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pinnacle_streamer_pg_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: pinnacle_app
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: app_db
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      DATABASE_URL: postgresql+asyncpg://test_user:testpass@db:5432/app_db
+    volumes:
+      - .:/app
+    command: >
+      bash -c "sleep 5 && alembic upgrade head"
+
+volumes:
+  pinnacle_streamer_pg_data:
